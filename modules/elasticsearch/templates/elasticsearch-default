@@ -1,0 +1,14 @@
+ES_USER=<%= @es_user %>
+ES_GROUP=<%= @es_group %>
+ES_HEAP_SIZE=<%= @es_heap_size %>
+ES_HEAP_NEWSIZE=<%= @es_heap_newsize %>
+ES_DIRECT_SIZE=<%= @es_direct_size %>
+MAX_OPEN_FILES=<%= @es_max_open_files %>
+MAX_LOCKED_MEMORY=<%= @es_max_locked_memory %>
+MAX_MAP_COUNT=<%= @es_max_map_count %>
+LOG_DIR=/var/log/elasticsearch
+DATA_DIR=/var/lib/elasticsearch
+WORK_DIR=/tmp/elasticsearch
+CONF_DIR=/etc/elasticsearch
+ES_JAVA_OPTS="<%= @es_java_opts %>"
+RESTART_ON_UPGRADE=<%= @es_restart_on_upgrade %>

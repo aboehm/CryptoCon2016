@@ -1,0 +1,95 @@
+node.rack: <%= @es_node_rack %>
+node.name: "<%= @fqdn %>"
+node.master: <%= @es_node_master %>
+node.data: <%= @es_node_data %>
+node.max_local_storage_nodes: <%= @es_node_max_local_storage_nodes %>
+
+indices.recovery.max_bytes_per_sec: 20mb
+indices.recovery.concurrent_streams: 5
+
+index.number_of_shards: <%= @es_index_number_of_shards %>
+index.number_of_replicas: <%= @es_index_number_of_replicas %>
+
+index.search.slowlog.threshold.query.warn: <%= es_index_search_slowlog_threshold_query_warn %>
+index.search.slowlog.threshold.query.info: <%= es_index_search_slowlog_threshold_query_info %>
+index.search.slowlog.threshold.query.debug: <%= es_index_search_slowlog_threshold_query_debug %>
+index.search.slowlog.threshold.query.trace: <%= es_index_search_slowlog_threshold_query_trace %>
+
+index.refresh_interval: <%= @es_index_refresh_interval %>ms
+
+index.search.slowlog.threshold.fetch.warn: <%= es_index_search_slowlog_threshold_fetch_warn %>
+index.search.slowlog.threshold.fetch.info: <%= es_index_search_slowlog_threshold_fetch_info %>
+index.search.slowlog.threshold.fetch.debug: <%= es_index_search_slowlog_threshold_fetch_debug %>
+index.search.slowlog.threshold.fetch.trace: <%= es_index_search_slowlog_threshold_fetch_trace %>
+
+index.indexing.slowlog.threshold.index.warn: <%= es_index_indexing_slowlog_threshold_fetch_warn %>
+index.indexing.slowlog.threshold.index.info: <%= es_index_indexing_slowlog_threshold_fetch_info %>
+index.indexing.slowlog.threshold.index.debug: <%= es_index_indexing_slowlog_threshold_fetch_debug %>
+index.indexing.slowlog.threshold.index.trace: <%= es_index_indexing_slowlog_threshold_fetch_trace %>
+
+<% if @es_path_conf.nil? %>path.conf: <%= @es_path_conf %><% end %>
+path.data: <%= @es_path_data %>
+path.logs: <%= @es_path_logs %>
+path.plugins: <%= @es_path_plugins %>
+<% if not @es_plugin_mandatory.nil? %>plugin.mandatory: <%= @es_plugin_mandatory %><% end %>
+
+bootstrap.mlockall: <%= @es_bootstrap_mlockall %>
+
+<% if not @es_network_bind_host.nil? %>network.bind_host: <%= @es_network_bind_host %><% else %>network.bind_host: 0.0.0.0<% end %>
+<% if not @es_network_publish_host.nil? %>network.publish_host: <%= @es_network_publish_host %><% end %>
+
+transport.tcp.port: <%= @es_transport_tcp_port %>
+transport.tcp.compress: <%= @es_transport_tcp_compress %>
+
+http.enabled: <%= @es_http_enabled %>
+<% if @es_http_enabled %>
+http.port: <%= @es_http_port %>
+http.compression_level: <%= @es_http_compression_level %>
+http.max_content_length: <%= @es_http_max_content_length %>
+http.jsonp.enable: <%= @es_http_jsonp_enable %>
+http.cors.enabled: <%= @es_http_cors_enabled %>
+<% if @es_http_cors_enabled %>
+http.cors.allow-origin: <%= @es_http_cors_allow_origin %>
+http.cors.allow-methods: <%= @es_http_cors_allow_methods %>
+http.cors.allow-headers: <%= @es_http_cors_allow_headers %>
+http.cors.allow-credentials: <%= @es_http_cors_allow_credentials %>
+<% end %>
+<% end %>
+
+#gateway.type: <%= es_gateway_type %>
+gateway.recover_after_nodes: <%= @es_gateway_recover_after_nodes %>
+gateway.recover_after_time: <%= @es_gateway_recover_after_time %>
+gateway.expected_nodes: <%= es_gateway_expected_nodes %>
+
+cluster.name: <%= @es_cluster_name %>
+cluster.routing.allocation.node_initial_primaries_recoveries: <%= @es_cluster_routing_allocation_node_initial_primaries_recoveries %>
+cluster.routing.allocation.node_concurrent_recoveries: <%= @es_cluster_routing_allocation_node_concurrent_recoveries %>
+cluster.routing.allocation.disk.watermark.low: <%= @es_cluster_routing_allocation_disk_watermark_low %>
+cluster.routing.allocation.disk.watermark.high: <%= @es_cluster_routing_allocation_disk_watermark_high %>
+
+discovery.zen.enabled: <%= @es_discovery_zen_enabled %>
+<% if @es_discovery_zen_enabled %>
+discovery.zen.minimum_master_nodes: <%= es_discovery_zen_minimum_master_nodes %>
+discovery.zen.ping.timeout: <%= es_discovery_zen_ping_timeout %>
+discovery.zen.ping.multicast.enabled: <%= es_discovery_zen_ping_multicast_enabled %>
+discovery.zen.ping.unicast.hosts: <%= es_discovery_zen_ping_unicast_hosts %>
+<% end %>
+
+monitor.jvm.gc.young.warn: <%= es_monitor_jvm_gc_young_warn %>
+monitor.jvm.gc.young.info: <%= es_monitor_jvm_gc_young_info %>
+monitor.jvm.gc.young.debug: <%= es_monitor_jvm_gc_young_debug %>
+
+monitor.jvm.gc.old.warn: <%= es_monitor_jvm_gc_old_warn %>
+monitor.jvm.gc.old.info: <%= es_monitor_jvm_gc_old_info %>
+monitor.jvm.gc.old.debug: <%= es_monitor_jvm_gc_old_debug %>
+
+index.unassigned.node_left.delayed_timeout: 0
+
+<% if not @es_tokenizer_default.nil? %>
+index:
+  analysis:
+    analyzer:
+      default:
+        tokenizer: <%= es_tokenizer_default %>
+<% end %>
+

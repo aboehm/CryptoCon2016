@@ -1,0 +1,78 @@
+server.port: <%= @port %>
+server.host: <%= @iface %>
+
+<% if not @base_path.nil? -%>
+server.basePath: "<%= @base_path %>"
+<% end -%>
+
+<% if @es_host.nil? -%>
+elasticsearch.url: "http://localhost:9200"
+<% else -%>
+elasticsearch.url: "<%= @es_host %>"
+<% if not @es_user.nil? -%>
+elasticsearch.username: "<%= @es_user %>"
+elasticsearch.password: "<%= @es_pass %>"
+<% end -%>
+<% end -%>
+<% if @es_preserverhost.nil? -%>
+elasticsearch.preserveHost: true
+<% else -%>
+elasticsearch.preserveHost: <%= @es_preserverhost %>
+<% end -%>
+
+<% if @es_index.nil? -%>
+kibana.index: ".kibana"
+<% else %>
+kibana.index: "<%= @es_index %>"
+<% end -%>
+
+# The default application to load.
+<% if not @default_app.nil? -%>
+kibana.defaultAppId: "<%= @default_app %>"
+<% end -%>
+
+# SSL for outgoing requests from the Kibana Server to the browser (PEM formatted)
+# server.ssl.cert: /path/to/your/server.crt
+# server.ssl.key: /path/to/your/server.key
+
+# Optional setting to validate that your Elasticsearch backend uses the same key files (PEM formatted)
+# elasticsearch.ssl.cert: /path/to/your/client.crt
+# elasticsearch.ssl.key: /path/to/your/client.key
+
+# If you need to provide a CA certificate for your Elasticsearch instance, put
+# the path of the pem file here.
+# elasticsearch.ssl.ca: /path/to/your/CA.pem
+
+# Set to false to have a complete disregard for the validity of the SSL
+# certificate.
+# elasticsearch.ssl.verify: true
+
+# Time in milliseconds to wait for elasticsearch to respond to pings, defaults to
+# request_timeout setting
+# elasticsearch.pingTimeout: 1500
+
+# Time in milliseconds to wait for responses from the back end or elasticsearch.
+# This must be > 0
+# elasticsearch.requestTimeout: 300000
+
+# Time in milliseconds for Elasticsearch to wait for responses from shards.
+# Set to 0 to disable.
+# elasticsearch.shardTimeout: 0
+
+# Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying
+# elasticsearch.startupTimeout: 5000
+
+# Set the path to where you would like the process id file to be created.
+# pid.file: /var/run/kibana.pid
+
+# If you would like to send the log output to a file you can set the path below.
+# logging.dest: stdout
+
+# Set this to true to suppress all logging output.
+# logging.silent: false
+
+# Set this to true to suppress all logging output except for error messages.
+# logging.quiet: false
+
+# Set this to true to log all events, including system usage information and all requests.
+# logging.verbose: false

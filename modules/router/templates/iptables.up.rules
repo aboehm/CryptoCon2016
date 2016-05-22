@@ -1,0 +1,19 @@
+*filter
+:INPUT ACCEPT [21:1200]
+-A INPUT -i <%= @lan_interface %> ! -s <%= @monitoring_host %> -j LOG
+-A INPUT -i <%= @wan_interface %> -j LOG
+:FORWARD ACCEPT [0:0]
+-A FORWARD -i <%= @lan_interface %> -o <%= @wan_interface %> -j LOG
+-A FORWARD -i <%= @wan_interface %> -o <%= @lan_interface %> -j LOG
+:OUTPUT ACCEPT [11:836]
+-A OUTPUT -o <%= @lan_interface %> ! -d <%= @monitoring_host %> -j LOG
+-A OUTPUT -o <%= @wan_interface %> -j LOG
+COMMIT
+
+*nat
+:PREROUTING ACCEPT [0:0]
+:INPUT ACCEPT [0:0]
+:OUTPUT ACCEPT [1:76]
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -o <%= @wan_interface %> -j MASQUERADE
+COMMIT
